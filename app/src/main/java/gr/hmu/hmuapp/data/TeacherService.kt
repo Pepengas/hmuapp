@@ -7,28 +7,7 @@ import org.jsoup.Connection
 
 const val TEACHERS_URL = "https://ee.hmu.gr/meli-dep/"
 
-private fun parseTeacherDetails(url: String): Triple<String, String, String> {
-    return try {
-        val doc = Jsoup.connect(url)
-            .userAgent("Mozilla/5.0")
-            .header("Accept-Language", "el,en;q=0.9")
-            .ignoreHttpErrors(true)
-            .timeout(10_000)
-            .method(Connection.Method.GET)
-            .followRedirects(true)
-            .get()
-
-        val phone = doc.selectFirst("a[href^=tel], p:matches((?i)τηλ|phone)")?.text()?.trim().orEmpty()
-        val email = doc.selectFirst("a[href^=mailto]")?.attr("href")?.removePrefix("mailto:")
-            ?: doc.selectFirst("p:matches((?i)e.?mail)")?.text()?.substringAfter(":")?.trim().orEmpty()
-        val interests = doc.selectFirst("p:matches(Ερευνητικ|Research)")?.text()?.substringAfter(":")?.trim().orEmpty()
-        Triple(phone, email, interests)
-    } catch (e: Exception) {
-        Triple("", "", "")
-    }
-}
-
-private fun parseTeacherDetails(url: String): Triple<String, String, String> {
+private fun fetchTeacherDetails(url: String): Triple<String, String, String> {
     return try {
         val doc = Jsoup.connect(url)
             .userAgent("Mozilla/5.0")
@@ -74,7 +53,7 @@ suspend fun fetchTeachers(): List<Teacher> = withContext(Dispatchers.IO) {
         val title = el.selectFirst("p:matches((?i)prof|καθηγη|επικουρ|Λέκτορ), span:matches((?i)prof|καθηγη|επικουρ|Λέκτορ)")?.text()?.trim().orEmpty()
         val department = el.selectFirst("p:matches((?i)department|τμήμα)")?.text()?.trim().orEmpty()
         val link = el.selectFirst("a[href]")?.absUrl("href").orEmpty()
-        val (phone, email, interests) = if (link.isNotEmpty()) parseTeacherDetails(link) else Triple("", "", "")
+val (phone, email, interests) = if (link.isNotEmpty()) fetchTeacherDetails(link) else Triple("", "", "")
         teachers.add(Teacher(name, title, department, phone, email, interests, link))
     }
 
