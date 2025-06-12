@@ -10,4 +10,6 @@
     <string name="fetch_failed">Failed to load news</string>
     <string name="no_internet">No internet connection</string>
     <string name="search_teachers">Search...</string>
+    <string name="teachers_load_failed">Failed to load teachers</string>
+    <string name="no_teachers_found">No teachers found</string>
 </resources>
