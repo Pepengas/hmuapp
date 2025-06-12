@@ -39,7 +39,7 @@ suspend fun fetchNews(): List<RssItem> = withContext(Dispatchers.IO) {
             val title = linkEl?.text()?.trim().orEmpty()
             if (title.isBlank()) continue
             val date = article.selectFirst("time, .date")?.text()?.trim().orEmpty()
-            val link = linkEl.absUrl("href")
+            val link = linkEl?.absUrl("href").orEmpty()
             items.add(RssItem(title, date, link))
         }
         return@withContext items
