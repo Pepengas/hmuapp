@@ -14,7 +14,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import gr.hmu.hmuapp.data.fetchRss
+import gr.hmu.hmuapp.data.fetchNews
 import gr.hmu.hmuapp.databinding.FragmentNewsBinding
 import kotlinx.coroutines.launch
 
@@ -54,9 +54,9 @@ class NewsFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
             return
         }
-        viewLifecycleOwner.lifecycleScope.launch {
+       viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val items = fetchRss("https://ee.hmu.gr/feed/")
+                val items = fetchNews()
                 adapter.submitList(items)
             } catch (e: Exception) {
                 Log.e("NewsFragment", "Failed to load news", e)
