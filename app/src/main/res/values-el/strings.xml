@@ -1,0 +1,11 @@
+<resources>
+    <string name="title_news">Ειδήσεις</string>
+    <string name="title_announcements">Ανακοινώσεις</string>
+    <string name="title_events">Εκδηλώσεις</string>
+    <string name="title_teachers">Διδάσκοντες</string>
+    <string name="title_student_links">Σύνδεσμοι Φοιτητών</string>
+    <string name="title_map">Χάρτης</string>
+    <string name="title_home">Αρχική</string>
+    <string name="welcome_message">Καλώς ήρθατε στην εφαρμογή HMU</string>
+    <string name="coming_soon">Έρχεται σύντομα</string>
+</resources>
