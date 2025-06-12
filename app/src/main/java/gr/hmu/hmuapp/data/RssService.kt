@@ -9,6 +9,7 @@ import java.net.URL
 
 suspend fun fetchRss(url: String): List<RssItem> = withContext(Dispatchers.IO) {
     val connection = URL(url).openConnection() as HttpURLConnection
+    connection.setRequestProperty("User-Agent", "Mozilla/5.0")
     connection.inputStream.use { stream ->
         val factory = XmlPullParserFactory.newInstance()
         factory.isNamespaceAware = false
