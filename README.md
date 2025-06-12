@@ -7,6 +7,8 @@ This project contains a simple Android application written in Kotlin. The defaul
 - Events
 - Teachers
 - Student Links
-- Map
+
+The Map screen exists in the navigation graph but is not shown in the bottom
+navigation menu due to the five item limit of `BottomNavigationView`.
 
 Each screen currently shows a placeholder layout.

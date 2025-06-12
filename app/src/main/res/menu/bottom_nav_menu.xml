@@ -20,8 +20,4 @@
         android:id="@+id/studentLinksFragment"
         android:icon="@drawable/ic_placeholder"
         android:title="@string/title_student_links" />
-    <item
-        android:id="@+id/mapFragment"
-        android:icon="@drawable/ic_placeholder"
-        android:title="@string/title_map" />
 </menu>

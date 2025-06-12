@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.util.Log
+import android.widget.Toast
 import gr.hmu.hmuapp.data.fetchRss
 import gr.hmu.hmuapp.databinding.FragmentNewsBinding
 import kotlinx.coroutines.launch
@@ -38,8 +40,13 @@ class NewsFragment : Fragment() {
         binding.newsList.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            val items = fetchRss("https://ee.hmu.gr/feed/")
-            adapter.submitList(items)
+            try {
+                val items = fetchRss("https://ee.hmu.gr/feed/")
+                adapter.submitList(items)
+            } catch (e: Exception) {
+                Log.e("NewsFragment", "Failed to load news", e)
+                Toast.makeText(requireContext(), R.string.fetch_failed, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
