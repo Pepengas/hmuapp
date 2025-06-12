@@ -9,4 +9,5 @@
     <string name="welcome_message">Καλώς ήρθατε στην εφαρμογή HMU</string>
     <string name="coming_soon">Έρχεται σύντομα</string>
     <string name="fetch_failed">Αποτυχία φόρτωσης ειδήσεων</string>
+    <string name="no_internet">Δεν υπάρχει σύνδεση στο διαδίκτυο</string>
 </resources>
