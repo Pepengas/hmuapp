@@ -53,7 +53,7 @@ suspend fun fetchTeachers(): List<Teacher> = withContext(Dispatchers.IO) {
         val title = el.selectFirst("p:matches((?i)prof|καθηγη|επικουρ|Λέκτορ), span:matches((?i)prof|καθηγη|επικουρ|Λέκτορ)")?.text()?.trim().orEmpty()
         val department = el.selectFirst("p:matches((?i)department|τμήμα)")?.text()?.trim().orEmpty()
         val link = el.selectFirst("a[href]")?.absUrl("href").orEmpty()
-        val (phone, email, interests) = if (link.isNotEmpty()) fetchTeacherDetails(link) else Triple("", "", "")
+val (phone, email, interests) = if (link.isNotEmpty()) fetchTeacherDetails(link) else Triple("", "", "")
         teachers.add(Teacher(name, title, department, phone, email, interests, link))
     }
 
