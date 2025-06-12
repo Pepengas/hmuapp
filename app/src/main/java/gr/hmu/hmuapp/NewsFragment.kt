@@ -54,7 +54,7 @@ class NewsFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
             return
         }
-        viewLifecycleOwner.lifecycleScope.launch {
+       viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val items = fetchNews()
                 adapter.submitList(items)
