@@ -15,7 +15,6 @@ suspend fun fetchNews(): List<RssItem> = withContext(Dispatchers.IO) {
             .referrer("https://www.google.com")
             .header("Accept-Language", "el,en;q=0.9")
             .ignoreHttpErrors(true)
-            .validateTLSCertificates(false)
             .timeout(10_000)
             .method(Connection.Method.GET)
             .followRedirects(true)
