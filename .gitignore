@@ -1,0 +1,14 @@
+# Gradle caches
+.gradle/
+
+# Build outputs
+build/
+**/build/
+
+# Local configuration
+local.properties
+
+# IDE configuration
+.idea/
+*.iml
+gradle/wrapper/gradle-wrapper.jar
