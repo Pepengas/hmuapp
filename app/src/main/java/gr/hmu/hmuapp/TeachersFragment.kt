@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import gr.hmu.hmuapp.data.fetchTeachers
 import gr.hmu.hmuapp.data.Teacher
+import gr.hmu.hmuapp.data.TEACHERS_URL
 import gr.hmu.hmuapp.databinding.FragmentTeachersBinding
 import kotlinx.coroutines.launch
 
@@ -58,6 +59,11 @@ class TeachersFragment : Fragment() {
                 return true
             }
         })
+
+        binding.openWebsiteButton.setOnClickListener {
+            val bundle = Bundle().apply { putString("url", TEACHERS_URL) }
+            findNavController().navigate(R.id.webViewFragment, bundle)
+        }
 
         loadTeachers()
     }

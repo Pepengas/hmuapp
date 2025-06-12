@@ -12,4 +12,5 @@
     <string name="search_teachers">Search...</string>
     <string name="teachers_load_failed">Failed to load teachers</string>
     <string name="no_teachers_found">No teachers found</string>
+    <string name="open_website">Open website</string>
 </resources>

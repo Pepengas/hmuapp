@@ -5,7 +5,28 @@ import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.Connection
 
-private const val TEACHERS_URL = "https://ee.hmu.gr/meli-dep/"
+const val TEACHERS_URL = "https://ee.hmu.gr/meli-dep/"
+
+private fun parseTeacherDetails(url: String): Triple<String, String, String> {
+    return try {
+        val doc = Jsoup.connect(url)
+            .userAgent("Mozilla/5.0")
+            .header("Accept-Language", "el,en;q=0.9")
+            .ignoreHttpErrors(true)
+            .timeout(10_000)
+            .method(Connection.Method.GET)
+            .followRedirects(true)
+            .get()
+
+        val phone = doc.selectFirst("a[href^=tel], p:matches((?i)τηλ|phone)")?.text()?.trim().orEmpty()
+        val email = doc.selectFirst("a[href^=mailto]")?.attr("href")?.removePrefix("mailto:")
+            ?: doc.selectFirst("p:matches((?i)e.?mail)")?.text()?.substringAfter(":")?.trim().orEmpty()
+        val interests = doc.selectFirst("p:matches(Ερευνητικ|Research)")?.text()?.substringAfter(":")?.trim().orEmpty()
+        Triple(phone, email, interests)
+    } catch (e: Exception) {
+        Triple("", "", "")
+    }
+}
 
 private fun parseTeacherDetails(url: String): Triple<String, String, String> {
     return try {

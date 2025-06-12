@@ -12,4 +12,5 @@
     <string name="search_teachers">Αναζήτηση...</string>
     <string name="teachers_load_failed">Αποτυχία φόρτωσης καθηγητών</string>
     <string name="no_teachers_found">Δεν βρέθηκαν διδάσκοντες</string>
+    <string name="open_website">Άνοιγμα ιστοσελίδας</string>
 </resources>
