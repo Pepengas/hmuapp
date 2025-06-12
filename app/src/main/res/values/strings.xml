@@ -7,4 +7,5 @@
     <string name="title_student_links">Σύνδεσμοι Φοιτητών</string>
     <string name="title_map">Χάρτης</string>
     <string name="coming_soon">Έρχεται σύντομα</string>
+    <string name="fetch_failed">Αποτυχία φόρτωσης ειδήσεων</string>
 </resources>
