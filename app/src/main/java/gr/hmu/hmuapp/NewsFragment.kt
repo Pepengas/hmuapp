@@ -10,6 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import gr.hmu.hmuapp.data.fetchRss
 import gr.hmu.hmuapp.databinding.FragmentNewsBinding
 import kotlinx.coroutines.launch
@@ -39,14 +43,39 @@ class NewsFragment : Fragment() {
         binding.newsList.layoutManager = LinearLayoutManager(requireContext())
         binding.newsList.adapter = adapter
 
+        binding.swipeRefresh.setOnRefreshListener { loadNews() }
+        loadNews()
+    }
+
+    private fun loadNews() {
+        binding.swipeRefresh.isRefreshing = true
+        if (!hasInternetConnection()) {
+            binding.swipeRefresh.isRefreshing = false
+            Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
+            return
+        }
         viewLifecycleOwner.lifecycleScope.launch {
-try {
+            try {
                 val items = fetchRss("https://ee.hmu.gr/feed/")
                 adapter.submitList(items)
             } catch (e: Exception) {
                 Log.e("NewsFragment", "Failed to load news", e)
                 Toast.makeText(requireContext(), R.string.fetch_failed, Toast.LENGTH_LONG).show()
+            } finally {
+                binding.swipeRefresh.isRefreshing = false
             }
+        }
+    }
+
+    private fun hasInternetConnection(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = cm.activeNetwork ?: return false
+            val capabilities = cm.getNetworkCapabilities(network) ?: return false
+            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            val networkInfo = cm.activeNetworkInfo ?: return false
+            networkInfo.isConnected
         }
     }
     override fun onDestroyView() {

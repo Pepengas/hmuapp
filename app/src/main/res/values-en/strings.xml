@@ -8,4 +8,5 @@
     <string name="title_map">Map</string>
     <string name="coming_soon">Coming Soon</string>
     <string name="fetch_failed">Failed to load news</string>
+    <string name="no_internet">No internet connection</string>
 </resources>
