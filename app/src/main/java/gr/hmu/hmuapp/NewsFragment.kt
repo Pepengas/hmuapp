@@ -40,7 +40,7 @@ class NewsFragment : Fragment() {
         binding.newsList.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-             try {
+try {
                 val items = fetchRss("https://ee.hmu.gr/feed/")
                 adapter.submitList(items)
             } catch (e: Exception) {
@@ -49,7 +49,6 @@ class NewsFragment : Fragment() {
             }
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
