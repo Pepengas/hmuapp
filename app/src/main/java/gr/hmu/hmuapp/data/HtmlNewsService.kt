@@ -16,8 +16,8 @@ suspend fun fetchNews(): List<RssItem> = withContext(Dispatchers.IO) {
         .get()
     val items = mutableListOf<RssItem>()
     for (titleDiv in doc.select("div.contenttitle")) {
-        val linkEl = titleDiv.selectFirst("a")
-        val title = linkEl?.text()?.trim().orEmpty()
+        val linkEl = titleDiv.selectFirst("a") ?: continue
+        val title = linkEl.text().trim()
         if (title.isBlank()) continue
         val link = linkEl.absUrl("href")
         val parent = titleDiv.parent()
