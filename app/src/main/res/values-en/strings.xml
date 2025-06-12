@@ -9,4 +9,5 @@
     <string name="coming_soon">Coming Soon</string>
     <string name="fetch_failed">Failed to load news</string>
     <string name="no_internet">No internet connection</string>
+    <string name="search_teachers">Search...</string>
 </resources>
