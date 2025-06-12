@@ -8,4 +8,5 @@
     <string name="title_home">Αρχική</string>
     <string name="welcome_message">Καλώς ήρθατε στην εφαρμογή HMU</string>
     <string name="coming_soon">Έρχεται σύντομα</string>
+    <string name="fetch_failed">Αποτυχία φόρτωσης ειδήσεων</string>
 </resources>
