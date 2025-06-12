@@ -11,15 +11,17 @@ private const val NEWS_URL = "https://ee.hmu.gr/news_gr/"
 suspend fun fetchNews(): List<RssItem> = withContext(Dispatchers.IO) {
     val doc = Jsoup.connect(NEWS_URL)
         .userAgent("Mozilla/5.0")
+        .referrer("https://www.google.com")
         .timeout(10_000)
         .method(Connection.Method.GET)
         .get()
     val items = mutableListOf<RssItem>()
     for (titleDiv in doc.select("div.contenttitle")) {
         val linkEl = titleDiv.selectFirst("a")
-        val title = linkEl?.text()?.trim().orEmpty()
+        val title = linkEl?.text()?.trim()?.takeIf { it.isNotBlank() }
+            ?: titleDiv.text().trim()
         if (title.isBlank()) continue
-        val link = linkEl.absUrl("href")
+        val link = linkEl?.absUrl("href").orEmpty()
         val parent = titleDiv.parent()
         val date = parent?.selectFirst("div.date")?.text()?.trim().orEmpty()
         items.add(RssItem(title, date, link))
