@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/newsFragment">
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="gr.hmu.hmuapp.NewsFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_news_to_web"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/announcementsFragment"
+        android:name="gr.hmu.hmuapp.AnnouncementsFragment"
+        android:label="@string/title_announcements"
+        tools:layout="@layout/fragment_announcements" />
+
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="gr.hmu.hmuapp.EventsFragment"
+        android:label="@string/title_events"
+        tools:layout="@layout/fragment_events" />
+
+    <fragment
+        android:id="@+id/teachersFragment"
+        android:name="gr.hmu.hmuapp.TeachersFragment"
+        android:label="@string/title_teachers"
+        tools:layout="@layout/fragment_teachers" />
+
+    <fragment
+        android:id="@+id/studentLinksFragment"
+        android:name="gr.hmu.hmuapp.StudentLinksFragment"
+        android:label="@string/title_student_links"
+        tools:layout="@layout/fragment_student_links" />
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="gr.hmu.hmuapp.MapFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="gr.hmu.hmuapp.WebViewFragment"
+        android:label="Web"
+        tools:layout="@layout/fragment_webview" />
+</navigation>
