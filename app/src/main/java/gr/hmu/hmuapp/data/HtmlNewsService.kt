@@ -9,12 +9,20 @@ import org.jsoup.Connection
 private const val NEWS_URL = "https://ee.hmu.gr/news_gr/"
 
 suspend fun fetchNews(): List<RssItem> = withContext(Dispatchers.IO) {
-    val doc = Jsoup.connect(NEWS_URL)
-        .userAgent("Mozilla/5.0")
-        .referrer("https://www.google.com")
-        .timeout(10_000)
-        .method(Connection.Method.GET)
-        .get()
+    val doc = try {
+        Jsoup.connect(NEWS_URL)
+            .userAgent("Mozilla/5.0")
+            .referrer("https://www.google.com")
+            .header("Accept-Language", "el,en;q=0.9")
+            .ignoreHttpErrors(true)
+            .validateTLSCertificates(false)
+            .timeout(10_000)
+            .method(Connection.Method.GET)
+            .followRedirects(true)
+            .get()
+    } catch (e: Exception) {
+        return@withContext emptyList()
+    }
     val items = mutableListOf<RssItem>()
     for (titleDiv in doc.select("div.contenttitle")) {
         val linkEl = titleDiv.selectFirst("a")
