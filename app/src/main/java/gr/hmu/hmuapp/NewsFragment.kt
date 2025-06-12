@@ -54,10 +54,13 @@ class NewsFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.no_internet, Toast.LENGTH_LONG).show()
             return
         }
-       viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val items = fetchNews()
                 adapter.submitList(items)
+                if (items.isEmpty()) {
+                    Toast.makeText(requireContext(), R.string.fetch_failed, Toast.LENGTH_LONG).show()
+                }
             } catch (e: Exception) {
                 Log.e("NewsFragment", "Failed to load news", e)
                 Toast.makeText(requireContext(), R.string.fetch_failed, Toast.LENGTH_LONG).show()
